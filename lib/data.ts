@@ -1,3 +1,5 @@
+import { asset } from "@/lib/utils";
+
 export const personalData = {
   name: "CHHOUN SOKTHARNAK",
   shortName: "SOKTHARNAK",
@@ -71,7 +73,7 @@ export const socialLinks: SocialLink[] = [
 export const githubProfile = {
   username: "ChhounSokthamak303",
   url: "https://github.com/ChhounSokthamak303",
-  avatar: "/assets/nak.jpg",
+  avatar: asset("/assets/nak.jpg"),
 };
 
 export type EducationEntry = {

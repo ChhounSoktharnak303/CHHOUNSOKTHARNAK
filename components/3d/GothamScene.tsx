@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Sparkles, Stars } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { lerp } from "@/lib/utils";
+import { asset, lerp } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
 /* textures                                                            */
@@ -65,8 +65,7 @@ function useSignalLogo() {
   useEffect(() => {
     let disposed = false;
     const img = new Image();
-    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-    img.src = `${base}/assets/batmanlogo.jpg`;
+    img.src = asset("/assets/batmanlogo.jpg");
     img.onload = () => {
       if (disposed) return;
       const w = 512;

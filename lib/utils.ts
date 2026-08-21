@@ -9,3 +9,8 @@ export function clamp(value: number, min: number, max: number) {
 export function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
+
+/* prefixes public/ asset paths with the deploy base path (GitHub Pages) */
+export function asset(path: string) {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+}

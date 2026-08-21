@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Grid, Sparkles, Stars } from "@react-three/drei";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { lerp } from "@/lib/utils";
+import { asset, lerp } from "@/lib/utils";
 import { ShootingStar } from "./ShootingStar";
 
 function makeGlowTexture(rgb: string) {
@@ -187,9 +187,8 @@ function TerminatorHologram({
   const glowTex = useMemo(() => makeGlowTexture("34,211,238"), []);
 
   const texture = useMemo(() => {
-    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
     const tex = new THREE.TextureLoader().load(
-      `${base}/assets/the-terminator-skeleton-stephen-humphries.jpg`,
+      asset("/assets/the-terminator-skeleton-stephen-humphries.jpg"),
       () => setLoaded(true)
     );
     return tex;

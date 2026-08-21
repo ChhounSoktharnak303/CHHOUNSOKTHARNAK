@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { personalData } from "@/lib/data";
+import { asset } from "@/lib/utils";
 
 export function ProfilePortal() {
   return (
@@ -65,7 +66,7 @@ export function ProfilePortal() {
 
       <div className="hud-frame relative aspect-square overflow-hidden rounded-3xl border border-neon/25 bg-panel">
         <Image
-          src="/assets/nak.jpg"
+          src={asset("/assets/nak.jpg")}
           alt={`${personalData.name} — profile portrait`}
           fill
           priority

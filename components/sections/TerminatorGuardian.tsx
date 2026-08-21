@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/utils";
 
 export function TerminatorGuardian() {
   const ref = useRef<HTMLDivElement>(null);
@@ -95,7 +96,7 @@ export function TerminatorGuardian() {
             }}
           >
             <Image
-              src="/assets/the-terminator-skeleton-stephen-humphries.jpg"
+              src={asset("/assets/the-terminator-skeleton-stephen-humphries.jpg")}
               alt="T-800 terminator endoskeleton on live feed"
               width={900}
               height={713}
