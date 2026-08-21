@@ -21,8 +21,8 @@ export function useMediaQuery(query: string, defaultValue = false) {
   return state;
 }
 
-export function useIsMobile() {
-  return useMediaQuery("(max-width: 767px)");
+export function useIsMobile(defaultValue = false) {
+  return useMediaQuery("(max-width: 767px)", defaultValue);
 }
 
 export function useIsTouch() {

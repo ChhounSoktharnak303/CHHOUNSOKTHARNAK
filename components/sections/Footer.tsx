@@ -40,7 +40,7 @@ function TelemetryCorners() {
 export function Footer() {
   const year = 2020;
   const footerRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
   const [sceneActive, setSceneActive] = useState(false);
 
   useEffect(() => {
@@ -59,13 +59,17 @@ export function Footer() {
       ref={footerRef}
       className="relative overflow-hidden border-t border-white/[0.07] bg-void py-20 md:py-24"
     >
-      <Scene3D
-        className="absolute inset-0"
-        fallback={<div className="scene-fallback absolute inset-0" />}
-        mountOnVisible
-      >
-        <MarsScene active={sceneActive} mobile={isMobile} />
-      </Scene3D>
+      {isMobile ? (
+        <div className="scene-fallback absolute inset-0" />
+      ) : (
+        <Scene3D
+          className="absolute inset-0"
+          fallback={<div className="scene-fallback absolute inset-0" />}
+          mountOnVisible
+        >
+          <MarsScene active={sceneActive} mobile={isMobile} />
+        </Scene3D>
+      )}
       <div className="vignette pointer-events-none absolute inset-0" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/50 to-transparent" />
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-44 w-[40rem] -translate-x-1/2 rounded-full bg-orange-500/[0.05] blur-[110px]" />

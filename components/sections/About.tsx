@@ -42,7 +42,7 @@ const FIELDS: Field[] = [
 
 export function About() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
   const [sceneActive, setSceneActive] = useState(false);
 
   useEffect(() => {
@@ -63,13 +63,17 @@ export function About() {
       className="relative overflow-hidden bg-deep py-28 md:py-36"
       aria-label="Identity database"
     >
-      <Scene3D
-        className="absolute inset-0"
-        fallback={<div className="scene-fallback absolute inset-0" />}
-        mountOnVisible
-      >
-        <GothamScene active={sceneActive} mobile={isMobile} />
-      </Scene3D>
+      {isMobile ? (
+        <div className="scene-fallback absolute inset-0" />
+      ) : (
+        <Scene3D
+          className="absolute inset-0"
+          fallback={<div className="scene-fallback absolute inset-0" />}
+          mountOnVisible
+        >
+          <GothamScene active={sceneActive} mobile={isMobile} />
+        </Scene3D>
+      )}
       <div className="vignette pointer-events-none absolute inset-0" />
       <div className="bg-grid-fine pointer-events-none absolute inset-0 opacity-[0.14]" />
       <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-blue-primary/[0.07] blur-[120px]" />

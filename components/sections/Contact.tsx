@@ -225,7 +225,7 @@ function WeChatChannel({ handle }: { handle: string }) {
 
 export function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
   const [sceneActive, setSceneActive] = useState(false);
 
   useEffect(() => {
@@ -253,13 +253,17 @@ export function Contact() {
       className="relative overflow-hidden bg-deep py-28 md:py-36"
       aria-label="Contact communication terminal"
     >
-      <Scene3D
-        className="absolute inset-0"
-        fallback={<div className="scene-fallback absolute inset-0" />}
-        mountOnVisible
-      >
-        <ApolloGalaxyScene active={sceneActive} mobile={isMobile} />
-      </Scene3D>
+      {isMobile ? (
+        <div className="scene-fallback absolute inset-0" />
+      ) : (
+        <Scene3D
+          className="absolute inset-0"
+          fallback={<div className="scene-fallback absolute inset-0" />}
+          mountOnVisible
+        >
+          <ApolloGalaxyScene active={sceneActive} mobile={isMobile} />
+        </Scene3D>
+      )}
       <div className="vignette pointer-events-none absolute inset-0" />
       <div className="bg-grid-fine pointer-events-none absolute inset-0 opacity-[0.16]" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-cyan-primary/[0.05] blur-[120px]" />

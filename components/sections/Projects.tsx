@@ -202,7 +202,7 @@ function MissionCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
   const [sceneActive, setSceneActive] = useState(false);
 
   useEffect(() => {
@@ -223,13 +223,17 @@ export function Projects() {
       className="relative overflow-hidden py-28 md:py-36"
       aria-label="Mission control projects"
     >
-      <Scene3D
-        className="absolute inset-0 bg-void"
-        fallback={<div className="scene-fallback absolute inset-0" />}
-        mountOnVisible
-      >
-        <UranusScene active={sceneActive} mobile={isMobile} />
-      </Scene3D>
+      {isMobile ? (
+        <div className="scene-fallback absolute inset-0 bg-void" />
+      ) : (
+        <Scene3D
+          className="absolute inset-0 bg-void"
+          fallback={<div className="scene-fallback absolute inset-0" />}
+          mountOnVisible
+        >
+          <UranusScene active={sceneActive} mobile={isMobile} />
+        </Scene3D>
+      )}
       <div className="vignette pointer-events-none absolute inset-0" />
 
       <OrbitDecorations />
