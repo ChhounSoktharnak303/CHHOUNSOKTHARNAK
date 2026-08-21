@@ -6,7 +6,7 @@ import { bootLines, personalData } from "@/lib/data";
 
 type BootPhase = "idle" | "sequence" | "online" | "done";
 
-const SEQUENCE_MS = 1900;
+const SEQUENCE_MS = 800;
 
 export function BootScreen() {
   const [phase, setPhase] = useState<BootPhase>("sequence");
@@ -45,7 +45,7 @@ export function BootScreen() {
     document.body.style.overflow = "hidden";
 
     const timers: ReturnType<typeof setTimeout>[] = [];
-    const lineStep = 260;
+    const lineStep = 110;
     bootLines.forEach((_, i) => {
       timers.push(
         setTimeout(() => setVisibleLines(i + 1), 200 + i * lineStep)
@@ -66,7 +66,7 @@ export function BootScreen() {
     const onKey = () => finish();
     window.addEventListener("keydown", onKey);
 
-    const safety = setTimeout(finish, 4000);
+    const safety = setTimeout(finish, 2500);
 
     return () => {
       timers.forEach(clearTimeout);
@@ -80,7 +80,7 @@ export function BootScreen() {
 
   useEffect(() => {
     if (phase !== "online") return;
-    const t = setTimeout(finish, 950);
+    const t = setTimeout(finish, 400);
     return () => clearTimeout(t);
   }, [phase, finish]);
 
@@ -89,8 +89,8 @@ export function BootScreen() {
       {phase !== "done" && (
         <motion.div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-deep"
-          exit={{ opacity: 0, scale: 1.06, filter: "blur(8px)" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          exit={{ opacity: 0, scale: 1.04, filter: "blur(6px)" }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           onClick={finish}
           role="status"
           aria-label="System booting"

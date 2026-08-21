@@ -52,8 +52,8 @@ function AssembleName({ active }: { active: boolean }) {
                     : {}
                 }
                 transition={{
-                  duration: 0.9,
-                  delay: 0.25 + i * 0.045,
+                  duration: 0.6,
+                  delay: 0.05 + i * 0.028,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
@@ -93,7 +93,7 @@ export function Hero() {
     const onBooted = () => setBooted(true);
     window.addEventListener("sk:booted", onBooted);
     /* failsafe: never leave the hero hidden if the boot event is missed */
-    const failsafe = setTimeout(() => setBooted(true), 4500);
+    const failsafe = setTimeout(() => setBooted(true), 2200);
     return () => {
       window.removeEventListener("sk:booted", onBooted);
       clearTimeout(failsafe);
@@ -139,7 +139,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0 }}
               className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]"
             >
               <span className="flex items-center gap-2 border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-emerald-300">
@@ -157,7 +157,7 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.85 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan"
             >
               {personalData.role}
@@ -166,7 +166,7 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={booted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 1 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted"
             >
               {personalData.roles.join("  •  ")}
@@ -175,7 +175,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1.15 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               className="mt-10 flex flex-wrap items-center gap-4"
             >
               <Magnetic>
@@ -213,7 +213,7 @@ export function Hero() {
         onClick={() => scrollTo("about")}
         initial={{ opacity: 0 }}
         animate={booted ? { opacity: 1 } : {}}
-        transition={{ delay: 1.6, duration: 0.8 }}
+        transition={{ delay: 0.95, duration: 0.6 }}
         className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[9px] tracking-[0.4em] text-muted transition-colors hover:text-neon"
         aria-label="Scroll to about section"
         data-cursor="button"
