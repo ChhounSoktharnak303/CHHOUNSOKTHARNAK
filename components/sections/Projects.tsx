@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Counter } from "@/components/ui/Counter";
 import { viewportOnce, fadeUp, staggerParent } from "@/components/animations/variants";
 import { useIsMobile } from "@/hooks/useDevice";
+import { Scene3D } from "@/components/3d/Scene3D";
 
 const UranusScene = dynamic(() => import("@/components/3d/UranusScene"), {
   ssr: false,
@@ -222,9 +223,13 @@ export function Projects() {
       className="relative overflow-hidden py-28 md:py-36"
       aria-label="Mission control projects"
     >
-      <div className="absolute inset-0 bg-void">
+      <Scene3D
+        className="absolute inset-0 bg-void"
+        fallback={<div className="scene-fallback absolute inset-0" />}
+        mountOnVisible
+      >
         <UranusScene active={sceneActive} mobile={isMobile} />
-      </div>
+      </Scene3D>
       <div className="vignette pointer-events-none absolute inset-0" />
 
       <OrbitDecorations />

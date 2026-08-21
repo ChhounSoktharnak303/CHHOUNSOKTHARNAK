@@ -288,6 +288,14 @@ body {
   transform-style: preserve-3d;
 }
 
+/* Static backdrop shown when a 3D scene cannot run (no WebGL / crash) */
+.scene-fallback {
+  background:
+    radial-gradient(ellipse 60% 45% at 70% 20%, rgba(37, 99, 235, 0.14), transparent 65%),
+    radial-gradient(ellipse 55% 40% at 25% 75%, rgba(34, 211, 238, 0.1), transparent 65%),
+    radial-gradient(ellipse 50% 35% at 80% 85%, rgba(79, 70, 229, 0.08), transparent 60%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

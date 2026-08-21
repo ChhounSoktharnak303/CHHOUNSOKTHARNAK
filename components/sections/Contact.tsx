@@ -17,6 +17,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { useClipboard } from "@/hooks/useClipboard";
 import { useIsMobile } from "@/hooks/useDevice";
+import { Scene3D } from "@/components/3d/Scene3D";
 
 const ApolloGalaxyScene = dynamic(
   () => import("@/components/3d/ApolloGalaxyScene"),
@@ -252,9 +253,13 @@ export function Contact() {
       className="relative overflow-hidden bg-deep py-28 md:py-36"
       aria-label="Contact communication terminal"
     >
-      <div className="absolute inset-0">
+      <Scene3D
+        className="absolute inset-0"
+        fallback={<div className="scene-fallback absolute inset-0" />}
+        mountOnVisible
+      >
         <ApolloGalaxyScene active={sceneActive} mobile={isMobile} />
-      </div>
+      </Scene3D>
       <div className="vignette pointer-events-none absolute inset-0" />
       <div className="bg-grid-fine pointer-events-none absolute inset-0 opacity-[0.16]" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-cyan-primary/[0.05] blur-[120px]" />

@@ -15,6 +15,7 @@ import {
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Typewriter } from "@/components/ui/Typewriter";
 import { useIsMobile } from "@/hooks/useDevice";
+import { Scene3D } from "@/components/3d/Scene3D";
 
 const GothamScene = dynamic(() => import("@/components/3d/GothamScene"), {
   ssr: false,
@@ -62,9 +63,13 @@ export function About() {
       className="relative overflow-hidden bg-deep py-28 md:py-36"
       aria-label="Identity database"
     >
-      <div className="absolute inset-0">
+      <Scene3D
+        className="absolute inset-0"
+        fallback={<div className="scene-fallback absolute inset-0" />}
+        mountOnVisible
+      >
         <GothamScene active={sceneActive} mobile={isMobile} />
-      </div>
+      </Scene3D>
       <div className="vignette pointer-events-none absolute inset-0" />
       <div className="bg-grid-fine pointer-events-none absolute inset-0 opacity-[0.14]" />
       <div className="pointer-events-none absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-blue-primary/[0.07] blur-[120px]" />

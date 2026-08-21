@@ -8,6 +8,7 @@ import { personalData } from "@/lib/data";
 import { Magnetic, SystemButton } from "@/components/animations/Magnetic";
 import { ProfilePortal } from "./ProfilePortal";
 import { useIsMobile } from "@/hooks/useDevice";
+import { Scene3D } from "@/components/3d/Scene3D";
 
 const GalaxyScene = dynamic(() => import("@/components/3d/GalaxyScene"), {
   ssr: false,
@@ -91,7 +92,12 @@ export function Hero() {
     }
     const onBooted = () => setBooted(true);
     window.addEventListener("sk:booted", onBooted);
-    return () => window.removeEventListener("sk:booted", onBooted);
+    /* failsafe: never leave the hero hidden if the boot event is missed */
+    const failsafe = setTimeout(() => setBooted(true), 4500);
+    return () => {
+      window.removeEventListener("sk:booted", onBooted);
+      clearTimeout(failsafe);
+    };
   }, []);
 
   useEffect(() => {
@@ -116,9 +122,12 @@ export function Hero() {
       className="relative min-h-screen overflow-hidden"
       aria-label="Introduction"
     >
-      <div className="absolute inset-0">
+      <Scene3D
+        className="absolute inset-0"
+        fallback={<div className="scene-fallback absolute inset-0" />}
+      >
         <GalaxyScene active={sceneActive} mobile={isMobile} />
-      </div>
+      </Scene3D>
       <div className="vignette pointer-events-none absolute inset-0" />
 
       <motion.div
