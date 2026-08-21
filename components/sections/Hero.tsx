@@ -16,51 +16,15 @@ const GalaxyScene = dynamic(() => import("@/components/3d/GalaxyScene"), {
 
 const NAME_LINES = ["CHHOUN", "SOKTHARNAK"];
 
-function AssembleName({ active }: { active: boolean }) {
-  let letterIndex = 0;
+function AssembleName() {
   return (
     <h1
       aria-label={personalData.name}
       className="font-display text-[13vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
     >
-      {NAME_LINES.map((line, li) => (
-        <span key={line} className="block overflow-visible">
-          {line.split("").map((ch) => {
-            const i = letterIndex++;
-            const seed = ((i * 137) % 60) - 30;
-            return (
-              <motion.span
-                key={`${li}-${i}`}
-                aria-hidden="true"
-                className="inline-block will-change-transform"
-                initial={{
-                  opacity: 0,
-                  x: seed,
-                  y: -((i * 53) % 70) - 20,
-                  rotate: seed / 4,
-                  filter: "blur(8px)",
-                }}
-                animate={
-                  active
-                    ? {
-                        opacity: 1,
-                        x: 0,
-                        y: 0,
-                        rotate: 0,
-                        filter: "blur(0px)",
-                      }
-                    : {}
-                }
-                transition={{
-                  duration: 0.6,
-                  delay: 0.05 + i * 0.028,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                {ch}
-              </motion.span>
-            );
-          })}
+      {NAME_LINES.map((line) => (
+        <span key={line} className="block">
+          {line}
         </span>
       ))}
     </h1>
@@ -68,7 +32,6 @@ function AssembleName({ active }: { active: boolean }) {
 }
 
 export function Hero() {
-  const [booted, setBooted] = useState(false);
   const [sceneActive, setSceneActive] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
@@ -80,25 +43,6 @@ export function Hero() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-
-  useEffect(() => {
-    let stored = false;
-    try {
-      stored = sessionStorage.getItem("sk-booted") === "1";
-    } catch {}
-    if (stored) {
-      setBooted(true);
-      return;
-    }
-    const onBooted = () => setBooted(true);
-    window.addEventListener("sk:booted", onBooted);
-    /* failsafe: never leave the hero hidden if the boot event is missed */
-    const failsafe = setTimeout(() => setBooted(true), 2200);
-    return () => {
-      window.removeEventListener("sk:booted", onBooted);
-      clearTimeout(failsafe);
-    };
-  }, []);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -136,12 +80,7 @@ export function Hero() {
       >
         <div className="grid items-center gap-16 lg:grid-cols-[1.12fr_0.88fr]">
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0 }}
-              className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]"
-            >
+            <div className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]">
               <span className="flex items-center gap-2 border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-emerald-300">
                 <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400" />
                 SYSTEM ONLINE
@@ -150,34 +89,19 @@ export function Hero() {
                 <MapPin size={11} className="text-neon" />
                 {personalData.location}
               </span>
-            </motion.div>
+            </div>
 
-            <AssembleName active={booted} />
+            <AssembleName />
 
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan"
-            >
+            <p className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan">
               {personalData.role}
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={booted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted"
-            >
+            <p className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted">
               {personalData.roles.join("  •  ")}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={booted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-4"
-            >
+            <div className="mt-10 flex flex-wrap items-center gap-4">
               <Magnetic>
                 <SystemButton onClick={() => scrollTo("about")}>
                   ENTER MY WORLD
@@ -199,7 +123,7 @@ export function Hero() {
                   GITHUB
                 </SystemButton>
               </Magnetic>
-            </motion.div>
+            </div>
           </div>
 
           <div className="relative">
@@ -208,19 +132,16 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <motion.button
+      <button
         type="button"
         onClick={() => scrollTo("about")}
-        initial={{ opacity: 0 }}
-        animate={booted ? { opacity: 1 } : {}}
-        transition={{ delay: 0.95, duration: 0.6 }}
         className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[9px] tracking-[0.4em] text-muted transition-colors hover:text-neon"
         aria-label="Scroll to about section"
         data-cursor="button"
       >
         SCROLL TO EXPLORE
         <ChevronDown size={16} className="animate-bounce text-neon" />
-      </motion.button>
+      </button>
     </section>
   );
 }
