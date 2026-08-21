@@ -65,7 +65,8 @@ function useSignalLogo() {
   useEffect(() => {
     let disposed = false;
     const img = new Image();
-    img.src = "/assets/batmanlogo.jpg";
+    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+    img.src = `${base}/assets/batmanlogo.jpg`;
     img.onload = () => {
       if (disposed) return;
       const w = 512;

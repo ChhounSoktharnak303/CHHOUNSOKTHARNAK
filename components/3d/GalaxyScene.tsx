@@ -187,8 +187,9 @@ function TerminatorHologram({
   const glowTex = useMemo(() => makeGlowTexture("34,211,238"), []);
 
   const texture = useMemo(() => {
+    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
     const tex = new THREE.TextureLoader().load(
-      "/assets/the-terminator-skeleton-stephen-humphries.jpg",
+      `${base}/assets/the-terminator-skeleton-stephen-humphries.jpg`,
       () => setLoaded(true)
     );
     return tex;

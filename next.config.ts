@@ -6,6 +6,9 @@ const isGhPages = process.env.DEPLOY_TARGET === "gh";
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGhPages ? "/CHHOUNSOKTHARNAK" : "",
+  },
   ...(isGhPages
     ? {
         output: "export",
