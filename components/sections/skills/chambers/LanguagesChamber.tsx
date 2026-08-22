@@ -1,6 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { IconType } from "react-icons";
+import {
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiPhp,
+  SiPython,
+  SiOpenjdk,
+  SiCplusplus,
+  SiSharp,
+} from "react-icons/si";
 import { skillCategories } from "@/lib/data";
 import {
   ChamberShell,
@@ -20,15 +31,15 @@ const COLORS: Record<string, string> = {
   "C#": "#7c3aed",
 };
 
-const MONO: Record<string, string> = {
-  HTML: "<>",
-  CSS: "#",
-  JavaScript: "JS",
-  PHP: "php",
-  Python: "Py",
-  Java: "Jv",
-  "C++": "C++",
-  "C#": "C#",
+const ICONS: Record<string, IconType> = {
+  HTML: SiHtml5,
+  CSS: SiCss,
+  JavaScript: SiJavascript,
+  PHP: SiPhp,
+  Python: SiPython,
+  Java: SiOpenjdk,
+  "C++": SiCplusplus,
+  "C#": SiSharp,
 };
 
 export function LanguagesChamber() {
@@ -46,19 +57,21 @@ export function LanguagesChamber() {
         viewport={viewportOnce}
         className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
       >
-        {category.items.map((item) => (
+        {category.items.map((item) => {
+          const Icon = ICONS[item.name];
+          return (
           <motion.div key={item.name} variants={fadeUp}>
             <TechCard>
               <div className="flex items-start justify-between">
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-md border font-mono text-sm font-bold transition-transform duration-400 group-hover:scale-110"
+                  className="flex h-11 w-11 items-center justify-center rounded-md border transition-transform duration-400 group-hover:scale-110"
                   style={{
                     color: COLORS[item.name] ?? "#22d3ee",
                     borderColor: `${COLORS[item.name] ?? "#22d3ee"}55`,
                     background: `${COLORS[item.name] ?? "#22d3ee"}14`,
                   }}
                 >
-                  {MONO[item.name]}
+                  {Icon ? <Icon size={24} /> : null}
                 </span>
                 <span className="font-mono text-[9px] tracking-[0.2em] text-muted/50">
                   {String(category.items.indexOf(item) + 1).padStart(2, "0")}
@@ -78,7 +91,8 @@ export function LanguagesChamber() {
               </div>
             </TechCard>
           </motion.div>
-        ))}
+          );
+        })}
       </motion.div>
     </ChamberShell>
   );
