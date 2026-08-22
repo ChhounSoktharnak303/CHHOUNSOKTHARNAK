@@ -71,8 +71,8 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const githubProfile = {
-  username: "ChhounSokthamak303",
-  url: "https://github.com/ChhounSokthamak303",
+  username: "ChhounSoktharnak303",
+  url: "https://github.com/ChhounSoktharnak303",
   avatar: asset("/assets/nak.jpg"),
 };
 

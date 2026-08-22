@@ -115,7 +115,7 @@ export function Hero() {
               <Magnetic>
                 <SystemButton
                   variant="ghost"
-                  href="https://github.com/ChhounSokthamak303"
+                  href="https://github.com/ChhounSoktharnak303"
                   external
                   ariaLabel="GitHub profile"
                 >
