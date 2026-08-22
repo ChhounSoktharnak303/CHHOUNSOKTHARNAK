@@ -88,13 +88,19 @@ export function About() {
         />
 
         <div className="grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <motion.aside
-            variants={slideFromLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            className="glass-panel hud-frame scanlines-overlay relative rounded-lg p-6"
-          >
+          <div className="panel-stage">
+            {/* physically layered under-lighting — painted behind the panel */}
+            <div aria-hidden className="stage-reflection" />
+            <div aria-hidden className="stage-pool" />
+            <div aria-hidden className="stage-shadow" />
+            <div aria-hidden className="stage-leak" />
+            <motion.aside
+              variants={slideFromLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              className="lit-panel glass-panel hud-frame scanlines-overlay relative rounded-lg p-6"
+            >
             <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
               <span className="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-neon">
                 <Fingerprint size={14} />
@@ -120,6 +126,7 @@ export function About() {
               <RefreshCw size={13} className="text-neon" />
             </motion.div>
           </motion.aside>
+          </div>
 
           <motion.div
             variants={slideFromRight}

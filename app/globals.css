@@ -206,6 +206,109 @@ body {
   border-right: 1.5px solid var(--color-neon);
 }
 
+/* ---- cinematic under-lighting: a hidden LED strip beneath a floating
+       panel, rendered as physically layered light — contact shadow,
+       diffused pool, seam leak and floor reflection ------------------- */
+.panel-stage {
+  position: relative;
+}
+
+/* ambient occlusion + contact shadow where the panel meets the dark */
+.stage-shadow {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: -13px;
+  height: 38px;
+  pointer-events: none;
+  background: radial-gradient(
+    46% 60% at 50% 0%,
+    rgba(1, 4, 10, 0.78),
+    rgba(1, 4, 10, 0.26) 52%,
+    transparent 74%
+  );
+  filter: blur(5px);
+}
+
+/* diffused light pool cast onto the environment — hot core directly
+   under the panel, smooth exponential-style decay outward */
+.stage-pool {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -48px;
+  height: 104px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      38% 54% at 50% 6%,
+      rgba(168, 209, 226, 0.16),
+      transparent 66%
+    ),
+    radial-gradient(
+      74% 104% at 50% 10%,
+      rgba(90, 144, 172, 0.08),
+      transparent 74%
+    );
+  filter: blur(11px);
+}
+
+/* hairline light leak along the seam where the strip meets the floor,
+   with its own restrained bloom — never wider than the panel */
+.stage-leak {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: -2px;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(186, 226, 240, 0.24) 22%,
+    rgba(198, 233, 246, 0.35) 50%,
+    rgba(186, 226, 240, 0.24) 78%,
+    transparent
+  );
+}
+.stage-leak::after {
+  content: "";
+  position: absolute;
+  inset: -3px -4%;
+  background: inherit;
+  filter: blur(5px);
+  opacity: 0.55;
+}
+
+/* faint reflection of the lit base on the floor plane, decaying fast */
+.stage-reflection {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: -86px;
+  height: 62px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(150, 195, 216, 0.06),
+    rgba(150, 195, 216, 0.02) 55%,
+    transparent 85%
+  );
+  filter: blur(9px);
+}
+
+/* the panel body: bottom rim catches the up-light, crown stays in
+   shadow, deep falloff keeps the charcoal mood */
+.lit-panel {
+  box-shadow:
+    inset 0 1px 0 rgba(148, 163, 184, 0.06),
+    inset 0 -1px 0 rgba(182, 221, 238, 0.11),
+    inset 0 -16px 28px -24px rgba(170, 210, 230, 0.14),
+    0 5px 16px -8px rgba(0, 0, 0, 0.62),
+    0 28px 54px -24px rgba(0, 0, 0, 0.78),
+    0 14px 44px -20px rgba(34, 211, 238, 0.12);
+}
+
 .bg-grid-fine {
   background-image:
     linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
