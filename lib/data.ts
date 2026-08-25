@@ -7,11 +7,11 @@ export const personalData = {
   roles: [
     "IT SPECIALIST",
     "CYBERSECURITY",
-    "NETWORKING",
+    "ADMIN",
     "GRAPHIC DESIGN",
   ],
   tagline:
-    "Portfolio of Chhoun Soktharnak — Full-Stack Developer, IT Specialist, Cybersecurity and Networking Enthusiast from Cambodia.",
+    "Portfolio of Chhoun Soktharnak — Full-Stack Developer, IT Specialist, Cybersecurity and Admin Enthusiast from Cambodia.",
   location: "CAMBODIA",
   birthDate: "January 24, 2001",
   sex: "Male",
