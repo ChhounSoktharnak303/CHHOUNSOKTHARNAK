@@ -270,7 +270,7 @@ export function Contact() {
 
       <div className="relative mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
-          index="SEC.06"
+          index="SEC.07"
           code="UPLINK"
           title="ESTABLISH CONNECTION"
           align="center"

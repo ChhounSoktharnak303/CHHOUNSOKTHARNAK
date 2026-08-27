@@ -85,6 +85,72 @@ export type EducationEntry = {
   ongoing?: boolean;
 };
 
+export type WorkExperienceEntry = {
+  id: string;
+  period: string;
+  startYear: string;
+  endYear: string;
+  role: string;
+  company: string;
+  type: "FULL-TIME" | "FREELANCE" | "PART-TIME";
+  status: "ACTIVE" | "COMPLETED";
+  highlights: string[];
+};
+
+export const workExperience: WorkExperienceEntry[] = [
+  {
+    id: "work-01",
+    period: "2026 — PRESENT",
+    startYear: "2026",
+    endYear: "NOW",
+    role: "ADMIN",
+    company: "ZKTH ASSOCIATES & PARTNERS CO., LTD.",
+    type: "FULL-TIME",
+    status: "ACTIVE",
+    highlights: [
+      "Manage daily administrative operations and office coordination.",
+      "Prepare and organize company documents, records, and reports.",
+      "Coordinate with clients, staff, and relevant departments to support smooth operations.",
+      "Provide IT support and troubleshoot hardware, software, network, and system-related issues.",
+      "Assist employees with computer, printer, internet, and other technical problems.",
+      "Support the company in resolving day-to-day IT and technical issues.",
+      "Assist with accounting, tax, and other administrative tasks as required.",
+    ],
+  },
+  {
+    id: "work-02",
+    period: "2022 — 2025",
+    startYear: "2022",
+    endYear: "2025",
+    role: "FREELANCER",
+    company: "SELF-EMPLOYED",
+    type: "FREELANCE",
+    status: "COMPLETED",
+    highlights: [
+      "Worked independently on various freelance projects and client requests.",
+      "Managed projects, deadlines, and communication with clients.",
+      "Developed technical, problem-solving, and communication skills through diverse projects.",
+      "Provided reliable support and solutions based on client requirements.",
+    ],
+  },
+  {
+    id: "work-03",
+    period: "2019 — 2022",
+    startYear: "2019",
+    endYear: "2022",
+    role: "SERVICE ASSISTANT",
+    company: "KB PRASAC BANK",
+    type: "FULL-TIME",
+    status: "COMPLETED",
+    highlights: [
+      "Assisted customers with banking services and general inquiries.",
+      "Supported daily branch operations and administrative tasks.",
+      "Maintained professional communication and provided quality customer service.",
+      "Assisted staff with documentation and other operational activities.",
+    ],
+  },
+];
+
 export const education: EducationEntry[] = [
   {
     period: "2017 — 2019",
@@ -364,6 +430,7 @@ export const projects: Project[] = [
 export const navLinks = [
   { id: "hero", label: "HOME" },
   { id: "about", label: "IDENTITY" },
+  { id: "work", label: "EXPERIENCE" },
   { id: "education", label: "EDUCATION" },
   { id: "skills", label: "MATRIX" },
   { id: "projects", label: "MISSIONS" },

@@ -242,7 +242,7 @@ export function Projects() {
 
       <div className="relative mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
-          index="SEC.04"
+          index="SEC.05"
           code="MISSIONS"
           title="MISSION CONTROL"
           description="Operations monitored from the outer system — tracked live against the ringed giant. New deployments transmit as they clear."

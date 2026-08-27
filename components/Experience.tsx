@@ -7,6 +7,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Education } from "@/components/sections/Education";
+import { WorkExperience } from "@/components/sections/WorkExperience";
 import { Skills } from "@/components/sections/skills/SkillsMatrix";
 import { Projects } from "@/components/sections/Projects";
 import { GitHubPortal } from "@/components/sections/GitHubPortal";
@@ -25,6 +26,7 @@ export function Experience() {
         <Hero />
         <About />
         <Education />
+        <WorkExperience />
         <Skills />
         <Projects />
         <GitHubPortal />

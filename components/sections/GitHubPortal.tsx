@@ -19,7 +19,7 @@ export function GitHubPortal() {
 
       <div className="relative mx-auto max-w-5xl px-6 lg:px-10">
         <SectionHeading
-          index="SEC.05"
+          index="SEC.06"
           code="SOURCE"
           title="SOURCE CODE PORTAL"
           align="center"

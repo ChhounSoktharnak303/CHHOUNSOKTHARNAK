@@ -43,7 +43,7 @@ export function Skills() {
 
       <div className="relative mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
-          index="SEC.03"
+          index="SEC.04"
           code="MATRIX"
           title="TECHNOLOGY MATRIX"
           align="center"
