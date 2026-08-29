@@ -142,7 +142,7 @@ export function Education() {
                               }`}
                             >
                               <Image
-                                src={asset("/assets/QRCODEUNIVER.png")}
+                                src={`${asset("/assets/QRCODEUNIVER.png")}?v=2`}
                                 alt="Build Bright University official QR code"
                                 width={96}
                                 height={96}
