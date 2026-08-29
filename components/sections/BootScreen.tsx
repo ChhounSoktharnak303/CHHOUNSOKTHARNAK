@@ -41,9 +41,6 @@ export function BootScreen() {
       return;
     }
 
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-
     const timers: ReturnType<typeof setTimeout>[] = [];
     const lineStep = 110;
     bootLines.forEach((_, i) => {
