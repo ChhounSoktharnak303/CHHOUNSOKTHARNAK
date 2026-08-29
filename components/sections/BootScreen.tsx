@@ -33,11 +33,11 @@ export function BootScreen() {
       skip = sessionStorage.getItem("sk-booted") === "1";
     } catch {}
 
-    if (
-      skip ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setPhase("done");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (skip || reduced || mobile) {
+      finish();
       return;
     }
 

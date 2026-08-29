@@ -105,11 +105,12 @@ export function Hero() {
       className="relative min-h-screen overflow-x-clip"
       aria-label="Introduction"
     >
-      <Scene3D
-        className="absolute inset-0"
-        fallback={<div className="scene-fallback absolute inset-0" />}
-      >
-        <GalaxyScene active={sceneActive} mobile={isMobile} />
+      <Scene3D className="absolute inset-0">
+        {isMobile ? (
+          <div className="scene-fallback absolute inset-0" />
+        ) : (
+          <GalaxyScene active={sceneActive} />
+        )}
       </Scene3D>
       <div className="vignette pointer-events-none absolute inset-0" />
 
