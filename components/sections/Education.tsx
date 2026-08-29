@@ -5,6 +5,7 @@ import { GraduationCap, Award } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 import { education } from "@/lib/data";
+import { asset } from "@/lib/utils";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/animations/TiltCard";
 import {
@@ -133,29 +134,30 @@ export function Education() {
                         <p className="mt-4 text-sm leading-relaxed text-muted">
                           {entry.description}
                         </p>
-                        {entry.school === "BUILD BRIGHT UNIVERSITY" && (
-                          <div
-                            className={`mt-5 flex items-center gap-3 ${
-                              leftSide ? "md:justify-end" : ""
-                            }`}
-                          >
-                            <Image
-                              src="/assets/QRCODEUNIVER.png"
-                              alt="Build Bright University official QR code"
-                              width={96}
-                              height={96}
-                              className="h-20 w-20 rounded-md border border-white/15 bg-white p-1"
-                            />
+                        {entry.school === "BUILD BRIGHT UNIVERSITY" &&
+                          entry.startYear === "2020" && (
                             <div
-                              className={`grid gap-0.5 font-mono text-[9px] leading-relaxed tracking-[0.2em] text-muted ${
-                                leftSide ? "md:text-right" : ""
+                              className={`mt-5 flex items-center gap-3 ${
+                                leftSide ? "md:justify-end" : ""
                               }`}
                             >
-                              <span className="text-neon">SCAN TO VERIFY</span>
-                              <span>OFFICIAL UNIVERSITY QR</span>
+                              <Image
+                                src={asset("/assets/QRCODEUNIVER.png")}
+                                alt="Build Bright University official QR code"
+                                width={96}
+                                height={96}
+                                className="h-20 w-20 rounded-md border border-white/15 bg-white p-1"
+                              />
+                              <div
+                                className={`grid gap-0.5 font-mono text-[9px] leading-relaxed tracking-[0.2em] text-muted ${
+                                  leftSide ? "md:text-right" : ""
+                                }`}
+                              >
+                                <span className="text-neon">SCAN TO VERIFY</span>
+                                <span>OFFICIAL UNIVERSITY QR</span>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
                       </TiltCard>
                     </motion.div>
                     <div aria-hidden="true" className="hidden md:block" />
