@@ -100,7 +100,7 @@ export function SystemButton({
   }, []);
 
   const base =
-    "relative inline-flex items-center justify-center gap-2 overflow-hidden px-7 py-3.5 font-mono text-[11px] md:text-xs tracking-[0.22em] uppercase transition-colors duration-300 select-none";
+    "relative inline-flex items-center justify-center gap-2 overflow-hidden px-5 py-2.5 font-mono text-[10px] tracking-[0.22em] uppercase transition-colors duration-300 select-none md:px-7 md:py-3.5 md:text-xs";
   const variants = {
     primary:
       "bg-gradient-to-r from-blue-primary to-cyan-primary text-white shadow-[0_0_28px_rgba(34,211,238,0.35)] hover:shadow-[0_0_44px_rgba(34,211,238,0.6)]",

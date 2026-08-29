@@ -8,7 +8,7 @@ import { asset } from "@/lib/utils";
 export function ProfilePortal() {
   return (
     <motion.div
-      className="group relative mx-auto w-[240px] sm:w-[280px] lg:w-[320px] select-none"
+      className="group relative mx-auto w-[170px] sm:w-[220px] lg:w-[320px] select-none"
       initial={{ opacity: 0, scale: 0.85, filter: "blur(10px)" }}
       animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
       transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -70,7 +70,7 @@ export function ProfilePortal() {
           alt={`${personalData.name} — profile portrait`}
           fill
           priority
-          sizes="(max-width: 640px) 240px, (max-width: 1024px) 280px, 320px"
+          sizes="(max-width: 640px) 170px, (max-width: 1024px) 220px, 320px"
           className="object-cover object-top contrast-[1.06] saturate-[0.92] transition-transform duration-700 group-hover:scale-[1.04]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/80 via-transparent to-void/20" />

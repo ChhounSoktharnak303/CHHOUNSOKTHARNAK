@@ -23,7 +23,7 @@ function AssembleName({ play }: { play: boolean }) {
   return (
     <h1
       aria-label={personalData.name}
-      className="font-display text-[13vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
+      className="font-display text-[9vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
     >
       {NAME_LINES.map((line, li) => (
         <span key={line} className="block overflow-hidden">
@@ -115,9 +115,9 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale, y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-14 pt-20 sm:pb-24 lg:px-10 lg:pt-28"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-12 pt-16 sm:pb-24 lg:px-10 lg:pt-28"
       >
-        <div className="grid items-center gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
+        <div className="grid items-center gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
           <div>
             <motion.div
               variants={list}
@@ -129,7 +129,7 @@ export function Hero() {
               <motion.div
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]"
+                className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em] sm:mb-7"
               >
                 <span className="flex items-center gap-2 border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-emerald-300">
                   <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400" />
@@ -146,7 +146,7 @@ export function Hero() {
               <motion.p
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan"
+                className="mt-4 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan sm:mt-7"
               >
                 {personalData.role}
               </motion.p>
@@ -154,7 +154,7 @@ export function Hero() {
               <motion.p
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted"
+                className="mt-2 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted sm:mt-3"
               >
                 {personalData.roles.join("  •  ")}
               </motion.p>
@@ -162,7 +162,7 @@ export function Hero() {
               <motion.div
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mt-8 flex flex-wrap items-center gap-3.5 sm:mt-10 sm:gap-4"
+                className="mt-6 flex flex-wrap items-center gap-3.5 md:gap-4 sm:mt-10"
               >
                 <Magnetic>
                   <SystemButton onClick={() => scrollTo("about")}>
