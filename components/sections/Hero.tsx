@@ -102,7 +102,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-x-clip"
+      className="relative min-h-screen overflow-hidden"
       aria-label="Introduction"
     >
       <Scene3D
@@ -115,10 +115,10 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale, y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-16 pt-24 sm:pb-24 lg:px-10 lg:pt-28"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-24 pt-28 lg:px-10"
       >
-        <div className="grid items-center gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
-          <div className="lg:order-1">
+        <div className="grid items-center gap-16 lg:grid-cols-[1.12fr_0.88fr]">
+          <div>
             <motion.div
               variants={list}
               custom={booted ? 0.1 : 0.4}
@@ -197,7 +197,7 @@ export function Hero() {
                 : undefined
             }
             transition={{ duration: 0.9, delay: 0.5, ease: heroEase }}
-            className="relative lg:order-2"
+            className="relative"
           >
             <ProfilePortal />
           </motion.div>
