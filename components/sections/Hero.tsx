@@ -23,7 +23,7 @@ function AssembleName({ play }: { play: boolean }) {
   return (
     <h1
       aria-label={personalData.name}
-      className="font-display text-[11vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
+      className="font-display text-[13vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
     >
       {NAME_LINES.map((line, li) => (
         <span key={line} className="block overflow-hidden">
@@ -115,10 +115,10 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale, y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-14 pt-20 sm:pb-24 lg:px-10 lg:pt-28"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-16 pt-24 sm:pb-24 lg:px-10 lg:pt-28"
       >
         <div className="grid items-center gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
-          <div className="order-2 lg:order-1">
+          <div className="lg:order-1">
             <motion.div
               variants={list}
               custom={booted ? 0.1 : 0.4}
@@ -162,7 +162,7 @@ export function Hero() {
               <motion.div
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mt-8 flex flex-wrap items-center gap-3.5 sm:mt-10 sm:gap-4"
+                className="mt-10 flex flex-wrap items-center gap-4"
               >
                 <Magnetic>
                   <SystemButton onClick={() => scrollTo("about")}>
@@ -197,7 +197,7 @@ export function Hero() {
                 : undefined
             }
             transition={{ duration: 0.9, delay: 0.5, ease: heroEase }}
-            className="relative order-1 lg:order-2"
+            className="relative lg:order-2"
           >
             <ProfilePortal />
           </motion.div>
