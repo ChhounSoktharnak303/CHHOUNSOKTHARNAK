@@ -6,13 +6,48 @@ import { skillCategories } from "@/lib/data";
 import { ChamberShell } from "@/components/sections/skills/shared";
 import { Counter } from "@/components/ui/Counter";
 
-const APP_META: Record<string, { color: string; tag: string }> = {
-  Word: { color: "#2b579a", tag: "DOC" },
-  Excel: { color: "#217346", tag: "XLS" },
-  PowerPoint: { color: "#d24726", tag: "PPT" },
-  Outlook: { color: "#0f6cbd", tag: "MSG" },
-  Access: { color: "#a4373a", tag: "DB" },
+const APP_META: Record<string, { color: string; tag: string; letter: string }> = {
+  Word: { color: "#2b579a", tag: "DOC", letter: "W" },
+  Excel: { color: "#217346", tag: "XLS", letter: "X" },
+  PowerPoint: { color: "#d24726", tag: "PPT", letter: "P" },
+  Outlook: { color: "#0f6cbd", tag: "MSG", letter: "O" },
+  Access: { color: "#a4373a", tag: "DB", letter: "A" },
 };
+
+function OfficeTile({
+  letter,
+  color,
+  className,
+}: {
+  letter: string;
+  color: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className={className}
+      aria-hidden="true"
+      role="img"
+    >
+      <rect width="48" height="48" rx="9" fill={color} />
+      <rect x="5" y="5" width="38" height="38" rx="3" fill="#ffffff" />
+      <path d="M5 31 L19 17 L24 22 L14 43 H5 Z" fill="#e4ecf6" />
+      <path d="M5 36 L24 17 L31 21 L27 43 H5 Z" fill="#cfdcea" opacity="0.7" />
+      <text
+        x="24"
+        y="33"
+        textAnchor="middle"
+        fontFamily="'Segoe UI', Segoe, Arial, sans-serif"
+        fontWeight="700"
+        fontSize="24"
+        fill={color}
+      >
+        {letter}
+      </text>
+    </svg>
+  );
+}
 
 export function OfficeChamber() {
   const category = skillCategories[6];
@@ -43,7 +78,11 @@ export function OfficeChamber() {
 
         <div className="grid grid-cols-2 gap-px bg-white/[0.06] sm:grid-cols-3 lg:grid-cols-5">
           {category.items.map((item, i) => {
-            const meta = APP_META[item.name] ?? { color: "#22d3ee", tag: "APP" };
+            const meta = APP_META[item.name] ?? {
+              color: "#22d3ee",
+              tag: "APP",
+              letter: item.name[0] ?? "?",
+            };
             return (
               <motion.div
                 key={item.name}
@@ -60,14 +99,14 @@ export function OfficeChamber() {
                 />
                 <div className="flex items-start justify-between">
                   <span
-                    className="flex h-12 w-12 items-center justify-center rounded-lg text-xl font-bold transition-transform duration-400 group-hover:-rotate-6 group-hover:scale-110"
-                    style={{
-                      color: "#fff",
-                      background: `linear-gradient(135deg, ${meta.color}, ${meta.color}bb)`,
-                      boxShadow: `0 6px 20px ${meta.color}44`,
-                    }}
+                    className="block transition-transform duration-400 group-hover:-rotate-6 group-hover:scale-110"
+                    style={{ filter: `drop-shadow(0 6px 12px ${meta.color}55)` }}
                   >
-                    {item.name[0]}
+                    <OfficeTile
+                      letter={meta.letter}
+                      color={meta.color}
+                      className="h-12 w-12"
+                    />
                   </span>
                   <span className="font-mono text-[9px] tracking-[0.2em] text-muted/50">
                     .{meta.tag}
