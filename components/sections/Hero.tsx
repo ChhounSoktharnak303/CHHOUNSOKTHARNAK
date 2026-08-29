@@ -102,7 +102,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-x-clip"
       aria-label="Introduction"
     >
       <Scene3D
@@ -115,9 +115,9 @@ export function Hero() {
 
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale, y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-24 pt-28 lg:px-10"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pb-14 pt-20 sm:pb-24 lg:px-10 lg:pt-28"
       >
-        <div className="grid items-center gap-16 lg:grid-cols-[1.12fr_0.88fr]">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
           <div>
             <motion.div
               variants={list}
@@ -162,7 +162,7 @@ export function Hero() {
               <motion.div
                 variants={item}
                 transition={{ duration: 0.8, ease: heroEase }}
-                className="mt-10 flex flex-wrap items-center gap-4"
+                className="mt-8 flex flex-wrap items-center gap-3.5 sm:mt-10 sm:gap-4"
               >
                 <Magnetic>
                   <SystemButton onClick={() => scrollTo("about")}>
