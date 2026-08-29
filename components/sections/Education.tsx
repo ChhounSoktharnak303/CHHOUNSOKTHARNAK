@@ -5,6 +5,7 @@ import { GraduationCap, Award } from "lucide-react";
 import { useRef } from "react";
 import { education } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TiltCard } from "@/components/animations/TiltCard";
 import {
   slideFromLeft,
   slideFromRight,
@@ -99,7 +100,10 @@ export function Education() {
                           : "md:col-start-2 md:pl-14"
                       }
                     >
-                      <article className="glass-panel hud-frame group relative overflow-hidden rounded-lg p-6 transition-transform duration-500 hover:-translate-y-1">
+                      <TiltCard
+                        cursor="button"
+                        className="glass-panel hud-frame rounded-lg p-6 ring-1 ring-inset ring-white/[0.07]"
+                      >
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/70 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                         <div
                           className={`flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-neon ${
@@ -128,7 +132,7 @@ export function Education() {
                         <p className="mt-4 text-sm leading-relaxed text-muted">
                           {entry.description}
                         </p>
-                      </article>
+                      </TiltCard>
                     </motion.div>
                     <div aria-hidden="true" className="hidden md:block" />
                   </div>

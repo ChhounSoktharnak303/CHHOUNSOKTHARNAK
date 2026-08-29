@@ -8,6 +8,7 @@ import { personalData } from "@/lib/data";
 import { Magnetic, SystemButton } from "@/components/animations/Magnetic";
 import { ProfilePortal } from "./ProfilePortal";
 import { useIsMobile } from "@/hooks/useDevice";
+import { useBooted } from "@/hooks/useBooted";
 import { Scene3D } from "@/components/3d/Scene3D";
 
 const GalaxyScene = dynamic(() => import("@/components/3d/GalaxyScene"), {
@@ -16,15 +17,38 @@ const GalaxyScene = dynamic(() => import("@/components/3d/GalaxyScene"), {
 
 const NAME_LINES = ["CHHOUN", "SOKTHARNAK"];
 
-function AssembleName() {
+const heroEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+function AssembleName({ play }: { play: boolean }) {
   return (
     <h1
       aria-label={personalData.name}
       className="font-display text-[13vw] font-bold leading-[0.95] tracking-tight text-frost sm:text-6xl md:text-7xl xl:text-[5.2rem]"
     >
-      {NAME_LINES.map((line) => (
-        <span key={line} className="block">
-          {line}
+      {NAME_LINES.map((line, li) => (
+        <span key={line} className="block overflow-hidden">
+          <span className="inline-flex" aria-hidden="true">
+            {line.split("").map((char, ci) => (
+              <motion.span
+                key={ci}
+                initial={{ y: "110%", opacity: 0, rotateX: -70 }}
+                animate={
+                  play
+                    ? { y: "0%", opacity: 1, rotateX: 0 }
+                    : undefined
+                }
+                transition={{
+                  duration: 0.7,
+                  delay: ci * 0.035 + li * 0.28,
+                  ease: heroEase,
+                }}
+                className="inline-block"
+                style={{ transformPerspective: 320 }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
         </span>
       ))}
     </h1>
@@ -35,6 +59,7 @@ export function Hero() {
   const [sceneActive, setSceneActive] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
+  const booted = useBooted();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,6 +84,20 @@ export function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const list = {
+    hidden: {},
+    visible: (delay: number) => ({
+      transition: {
+        staggerChildren: 0.09,
+        delayChildren: delay,
+      },
+    }),
+  };
+  const item = {
+    hidden: { opacity: 0, y: 26, filter: "blur(6px)" },
+    visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -80,55 +119,88 @@ export function Hero() {
       >
         <div className="grid items-center gap-16 lg:grid-cols-[1.12fr_0.88fr]">
           <div>
-            <div className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]">
-              <span className="flex items-center gap-2 border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-emerald-300">
-                <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400" />
-                SYSTEM ONLINE
-              </span>
-              <span className="flex items-center gap-1.5 border border-white/10 bg-white/[0.03] px-3 py-1.5 text-muted">
-                <MapPin size={11} className="text-neon" />
-                {personalData.location}
-              </span>
-            </div>
+            <motion.div
+              variants={list}
+              custom={booted ? 0.1 : 0.4}
+              initial="hidden"
+              animate={booted ? "visible" : "hidden"}
+              className=""
+            >
+              <motion.div
+                variants={item}
+                transition={{ duration: 0.8, ease: heroEase }}
+                className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-[0.3em]"
+              >
+                <span className="flex items-center gap-2 border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-emerald-300">
+                  <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-emerald-400" />
+                  SYSTEM ONLINE
+                </span>
+                <span className="flex items-center gap-1.5 border border-white/10 bg-white/[0.03] px-3 py-1.5 text-muted">
+                  <MapPin size={11} className="text-neon" />
+                  {personalData.location}
+                </span>
+              </motion.div>
 
-            <AssembleName />
+              <AssembleName play={booted} />
 
-            <p className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan">
-              {personalData.role}
-            </p>
+              <motion.p
+                variants={item}
+                transition={{ duration: 0.8, ease: heroEase }}
+                className="mt-7 font-mono text-sm md:text-lg tracking-[0.32em] text-neon text-glow-cyan"
+              >
+                {personalData.role}
+              </motion.p>
 
-            <p className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted">
-              {personalData.roles.join("  •  ")}
-            </p>
+              <motion.p
+                variants={item}
+                transition={{ duration: 0.8, ease: heroEase }}
+                className="mt-3 font-mono text-[11px] md:text-xs tracking-[0.22em] text-muted"
+              >
+                {personalData.roles.join("  •  ")}
+              </motion.p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Magnetic>
-                <SystemButton onClick={() => scrollTo("about")}>
-                  ENTER MY WORLD
-                </SystemButton>
-              </Magnetic>
-              <Magnetic>
-                <SystemButton variant="outline" onClick={() => scrollTo("skills")}>
-                  EXPLORE TECHNOLOGY
-                </SystemButton>
-              </Magnetic>
-              <Magnetic>
-                <SystemButton
-                  variant="ghost"
-                  href="https://github.com/ChhounSoktharnak303"
-                  external
-                  ariaLabel="GitHub profile"
-                >
-                  <Github size={14} />
-                  GITHUB
-                </SystemButton>
-              </Magnetic>
-            </div>
+              <motion.div
+                variants={item}
+                transition={{ duration: 0.8, ease: heroEase }}
+                className="mt-10 flex flex-wrap items-center gap-4"
+              >
+                <Magnetic>
+                  <SystemButton onClick={() => scrollTo("about")}>
+                    ENTER MY WORLD
+                  </SystemButton>
+                </Magnetic>
+                <Magnetic>
+                  <SystemButton variant="outline" onClick={() => scrollTo("skills")}>
+                    EXPLORE TECHNOLOGY
+                  </SystemButton>
+                </Magnetic>
+                <Magnetic>
+                  <SystemButton
+                    variant="ghost"
+                    href="https://github.com/ChhounSoktharnak303"
+                    external
+                    ariaLabel="GitHub profile"
+                  >
+                    <Github size={14} />
+                    GITHUB
+                  </SystemButton>
+                </Magnetic>
+              </motion.div>
+            </motion.div>
           </div>
 
-          <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)" }}
+            animate={
+              booted
+                ? { opacity: 1, scale: 1, filter: "blur(0px)" }
+                : undefined
+            }
+            transition={{ duration: 0.9, delay: 0.5, ease: heroEase }}
+            className="relative"
+          >
             <ProfilePortal />
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 

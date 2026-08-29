@@ -2,6 +2,8 @@
 
 import { MotionConfig } from "framer-motion";
 import { Cursor } from "@/components/ui/Cursor";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { Atmosphere } from "@/components/ui/Atmosphere";
 import { BootScreen } from "@/components/sections/BootScreen";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
@@ -19,7 +21,9 @@ export function Experience() {
   return (
     <MotionConfig reducedMotion="user">
       <BootScreen />
+      <Atmosphere />
       <Cursor />
+      <ScrollProgress />
       <Navbar />
       <div className="noise-overlay" aria-hidden="true" />
       <main id="main">

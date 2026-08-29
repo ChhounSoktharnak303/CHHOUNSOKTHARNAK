@@ -13,11 +13,18 @@ const MODE_LABELS: Record<CursorMode, string> = {
   link: "",
 };
 
+const TRAIL_COLORS = ["#22d3ee", "#3b82f6", "#67e8f9", "#f8fafc"];
+
+type Trail = { id: number; x: number; y: number; color: string; size: number };
+
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<CursorMode>("default");
   const [visible, setVisible] = useState(false);
+  const [trail, setTrail] = useState<Trail[]>([]);
+  const trailId = useRef(0);
+  const lastSpawn = useRef(0);
 
   useEffect(() => {
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -37,6 +44,23 @@ export function Cursor() {
       dotY(e.clientY);
       ringX(e.clientX);
       ringY(e.clientY);
+
+      const now = performance.now();
+      if (now - lastSpawn.current > 46) {
+        lastSpawn.current = now;
+        const id = trailId.current++;
+        const t: Trail = {
+          id,
+          x: e.clientX + (Math.random() - 0.5) * 6,
+          y: e.clientY + (Math.random() - 0.5) * 6,
+          color: TRAIL_COLORS[id % TRAIL_COLORS.length],
+          size: 1.5 + Math.random() * 2.5,
+        };
+        setTrail((prev) => [...prev.slice(-26), t]);
+        setTimeout(() => {
+          setTrail((prev) => prev.filter((p) => p.id !== id));
+        }, 900);
+      }
     };
 
     const onLeave = () => setVisible(false);
@@ -75,6 +99,22 @@ export function Cursor() {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
+      {trail.map((t) => (
+        <span
+          key={t.id}
+          className="absolute rounded-full mix-blend-screen"
+          style={{
+            left: t.x,
+            top: t.y,
+            width: t.size,
+            height: t.size,
+            background: t.color,
+            boxShadow: `0 0 10px ${t.color}`,
+            opacity: 1,
+            animation: "trail-fade 0.9s ease-out forwards",
+          }}
+        />
+      ))}
       <div
         ref={dotRef}
         className="fixed left-0 top-0 -ml-[3px] -mt-[3px] h-1.5 w-1.5 rounded-full bg-neon shadow-[0_0_10px_rgba(34,211,238,0.9)]"

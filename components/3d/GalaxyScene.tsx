@@ -42,10 +42,16 @@ function NebulaLayer() {
   );
 
   const group = useRef<THREE.Group>(null);
+  const { pointer } = useThree();
+  const target = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   useFrame((state) => {
     if (!group.current) return;
     const t = state.clock.elapsedTime;
+    target.current.x = lerp(target.current.x, pointer.x * 1.6, 0.03);
+    target.current.y = lerp(target.current.y, pointer.y * 1.1, 0.03);
     group.current.rotation.z = Math.sin(t * 0.02) * 0.04;
+    group.current.position.x = target.current.x;
+    group.current.position.y = -target.current.y;
   });
 
   return (
