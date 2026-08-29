@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navLinks, personalData } from "@/lib/data";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { asset } from "@/lib/utils";
 
 const SECTION_IDS = navLinks.map((l) => l.id);
 
@@ -93,16 +95,33 @@ export function Navbar() {
             })}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-            data-cursor="button"
-            className="flex h-9 w-9 items-center justify-center border border-white/[0.12] text-muted transition-colors hover:border-neon/50 hover:text-neon lg:hidden"
-          >
-            {open ? <X size={16} /> : <Menu size={16} />}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => go("hero")}
+              data-cursor="button"
+              aria-label="Go to profile"
+              className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-neon/40 bg-deep shadow-[0_0_12px_rgba(34,211,238,0.25)] transition-colors hover:border-neon"
+            >
+              <Image
+                src={asset("/assets/nak.jpg")}
+                alt=""
+                width={36}
+                height={36}
+                className="h-full w-full object-cover object-top"
+              />
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-label={open ? "Close menu" : "Open menu"}
+              data-cursor="button"
+              className="flex h-9 w-9 items-center justify-center border border-white/[0.12] text-muted transition-colors hover:border-neon/50 hover:text-neon lg:hidden"
+            >
+              {open ? <X size={16} /> : <Menu size={16} />}
+            </button>
+          </div>
         </div>
       </header>
 
